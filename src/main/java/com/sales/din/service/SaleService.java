@@ -1,6 +1,6 @@
 package com.sales.din.service;
 
-import com.sales.din.dto.ProductDTO;
+import com.sales.din.dto.ProductSaleDTO;
 import com.sales.din.dto.ProductInfoDTO;
 import com.sales.din.dto.SaleDTO;
 import com.sales.din.dto.SaleInfoDTO;
@@ -100,7 +100,7 @@ public class SaleService {
         }
     }
 
-    private List<ItemSale> getItemSale(List<ProductDTO> products) {
+    private List<ItemSale> getItemSale(List<ProductSaleDTO> products) {
 
         if (products.isEmpty()) {
             throw new InvalidOperationException("Não é possível adicionar a venda sem itens!");
