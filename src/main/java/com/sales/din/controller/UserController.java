@@ -1,6 +1,7 @@
 package com.sales.din.controller;
 
 import com.sales.din.dto.ResponseDTO;
+import com.sales.din.dto.UserDTO;
 import com.sales.din.entity.User;
 import com.sales.din.service.UserService;
 import jakarta.validation.Valid;
@@ -30,7 +31,7 @@ public class UserController {
     public ResponseEntity getById(@PathVariable long id) { return new ResponseEntity<>(userService.findById(id), HttpStatus.OK); }
 
     @PostMapping
-    public ResponseEntity post(@Valid @RequestBody User user) {
+    public ResponseEntity post(@Valid @RequestBody UserDTO user) {
         try {
             return new ResponseEntity(userService.save(user), HttpStatus.CREATED);
         } catch (Exception error) {
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity put(@Valid @RequestBody User user) {
+    public ResponseEntity put(@Valid @RequestBody UserDTO user) {
         try {
             return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
         } catch (Exception error) {
