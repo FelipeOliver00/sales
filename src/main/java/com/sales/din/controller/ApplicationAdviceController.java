@@ -3,7 +3,6 @@ package com.sales.din.controller;
 import com.sales.din.dto.ResponseDTO;
 import com.sales.din.exceptions.InvalidOperationException;
 import com.sales.din.exceptions.NoItemException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
