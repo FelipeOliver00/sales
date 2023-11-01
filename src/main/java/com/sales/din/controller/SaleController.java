@@ -2,8 +2,6 @@ package com.sales.din.controller;
 
 import com.sales.din.dto.ResponseDTO;
 import com.sales.din.dto.SaleDTO;
-import com.sales.din.exceptions.InvalidOperationException;
-import com.sales.din.exceptions.NoItemException;
 import com.sales.din.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,20 +25,19 @@ public class SaleController {
     public ResponseEntity getById(@PathVariable long id) {
         try {
             return new ResponseEntity<>(saleService.getById(id) , HttpStatus.OK);
-        } catch (NoItemException | InvalidOperationException error) {
-            return new ResponseEntity<>(new ResponseDTO<>(error.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (Exception error) {
+           return new ResponseEntity<>(error.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 
     @PostMapping
     public ResponseEntity post(@RequestBody SaleDTO saleDTO) {
         try {
-            long id = saleService.save(saleDTO);
-            return new ResponseEntity<>("Venda realizada com sucesso!: " + id, HttpStatus.CREATED);
-        } catch (NoItemException | InvalidOperationException error) {
-            return new ResponseEntity<>(new ResponseDTO<>(error.getMessage()), HttpStatus.BAD_REQUEST);
+            saleService.save(saleDTO);
+            return new ResponseEntity<>(new ResponseDTO<>("Venda realizada com sucesso! "), HttpStatus.CREATED);
         } catch (Exception error) {
-            return new ResponseEntity<>(new ResponseDTO<>(error.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(error.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

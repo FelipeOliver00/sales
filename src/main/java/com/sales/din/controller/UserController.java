@@ -2,9 +2,7 @@ package com.sales.din.controller;
 
 import com.sales.din.dto.ResponseDTO;
 import com.sales.din.entity.User;
-import com.sales.din.exceptions.NoItemException;
 import com.sales.din.service.UserService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -43,8 +41,6 @@ public class UserController {
     public ResponseEntity put(@RequestBody User user) {
         try {
             return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
-        } catch (NoItemException error) {
-            return new ResponseEntity<>(new ResponseDTO<>(error.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception error) {
             return new ResponseEntity<>(new ResponseDTO<>(error.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
