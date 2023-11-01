@@ -1,6 +1,7 @@
 package com.sales.din.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class User {
     private Long id;
 
     @Column(length = 100, nullable = false)
+    @NotBlank(message = "Campo nome é obrigatório")
     private String name;
 
     private boolean isEnabled;

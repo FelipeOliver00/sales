@@ -3,6 +3,7 @@ package com.sales.din.controller;
 import com.sales.din.dto.ResponseDTO;
 import com.sales.din.entity.Product;
 import com.sales.din.repository.ProductRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    public ResponseEntity post(@RequestBody Product product) {
+    public ResponseEntity post(@Valid @RequestBody Product product) {
         try {
             return new ResponseEntity<>(productRepository.save(product), HttpStatus.CREATED);
         } catch (Exception error) {
@@ -35,7 +36,7 @@ public class ProdutoController {
     }
 
     @PutMapping()
-    public ResponseEntity put(@RequestBody Product product) {
+    public ResponseEntity put(@Valid @RequestBody Product product) {
         try {
             return new ResponseEntity<>(productRepository.save(product), HttpStatus.OK);
         } catch (Exception error) {

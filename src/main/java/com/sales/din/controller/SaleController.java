@@ -3,6 +3,7 @@ package com.sales.din.controller;
 import com.sales.din.dto.ResponseDTO;
 import com.sales.din.dto.SaleDTO;
 import com.sales.din.service.SaleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class SaleController {
     }
 
     @PostMapping
-    public ResponseEntity post(@RequestBody SaleDTO saleDTO) {
+    public ResponseEntity post(@Valid @RequestBody SaleDTO saleDTO) {
         try {
             saleService.save(saleDTO);
             return new ResponseEntity<>(new ResponseDTO<>("Venda realizada com sucesso! "), HttpStatus.CREATED);
