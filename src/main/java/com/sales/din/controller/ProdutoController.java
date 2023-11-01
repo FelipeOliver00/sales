@@ -1,5 +1,6 @@
 package com.sales.din.controller;
 
+import com.sales.din.dto.ResponseDTO;
 import com.sales.din.entity.Product;
 import com.sales.din.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ProdutoController {
         try {
             return new ResponseEntity<>(productRepository.save(product), HttpStatus.CREATED);
         } catch (Exception error) {
-            return new ResponseEntity(error.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(new ResponseDTO<>(error.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -38,7 +39,7 @@ public class ProdutoController {
         try {
             return new ResponseEntity<>(productRepository.save(product), HttpStatus.OK);
         } catch (Exception error) {
-            return new ResponseEntity(error.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(new ResponseDTO<>(error.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -46,9 +47,9 @@ public class ProdutoController {
     public ResponseEntity delete(@PathVariable Long id) {
         try {
             productRepository.deleteById(id);
-            return new ResponseEntity<>("Produto removido com sucesso", HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseDTO("Produto removido com sucesso"), HttpStatus.OK);
         }catch (Exception error){
-            return new ResponseEntity<>(error.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ResponseDTO(error.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
