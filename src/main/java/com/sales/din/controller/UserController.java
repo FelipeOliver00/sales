@@ -2,7 +2,6 @@ package com.sales.din.controller;
 
 import com.sales.din.dto.ResponseDTO;
 import com.sales.din.dto.UserDTO;
-import com.sales.din.entity.User;
 import com.sales.din.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
