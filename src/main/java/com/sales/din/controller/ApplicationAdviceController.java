@@ -3,7 +3,9 @@ package com.sales.din.controller;
 import com.sales.din.dto.ResponseDTO;
 import com.sales.din.exceptions.InvalidOperationException;
 import com.sales.din.exceptions.NoItemException;
+import com.sales.din.exceptions.PasswordNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,6 +29,18 @@ public class ApplicationAdviceController {
     public ResponseDTO handleNoItemException(InvalidOperationException ex) {
         String messageError = ex.getMessage();
         return new ResponseDTO(messageError);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseDTO handleUserNameNotFoundException(UsernameNotFoundException ex) {
+        return new ResponseDTO(ex.getMessage());
+    }
+
+    @ExceptionHandler(PasswordNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseDTO hanldePasswordNotFoundException( PasswordNotFoundException ex) {
+        return new ResponseDTO(ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
